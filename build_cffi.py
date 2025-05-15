@@ -10,15 +10,8 @@ from cffi import FFI
 # Get the compiler. We support gcc and clang.
 # The compiler is determnined from the environment and uses sysconfig as a fallback.
 source = "environment variable 'CC'" if "CC" in os.environ else "sysconfig"
-_compiler = os.environ.get("CC", sysconfig.get_config_var("CC"))
-print(f"Using compiler from {source}: {_compiler}")
-
-if "gcc" in _compiler:
-    compiler = "gcc"
-elif "clang" in _compiler:
-    compiler = "clang"
-else:
-    raise ValueError(f"Compiler {_compiler} not supported for 21cmFAST")
+compiler = os.environ.get("CC", sysconfig.get_config_var("CC"))
+print(f"Using compiler from {source}: {compiler}")
 
 ffi = FFI()
 
